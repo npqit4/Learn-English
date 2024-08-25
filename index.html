@@ -84,7 +84,7 @@
     }
 
     function fetchVocabulary() {
-        fetch('https://f772-42-116-198-161.ngrok-free.app/vocabulary')
+        fetch('http://127.0.0.1:8000/vocabulary')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('vocabularyTable');
@@ -117,7 +117,7 @@
     }
 
     function fetchPhrase() {
-        fetch('https://f772-42-116-198-161.ngrok-free.app/phrase')
+        fetch('http://127.0.0.1:8000/phrase')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('phraseTable');
@@ -145,7 +145,7 @@
     }
 
     function fetchQuestion() {
-        fetch('https://f772-42-116-198-161.ngrok-free.app/question')
+        fetch('http://127.0.0.1:8000/question')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('questionTable');
@@ -171,7 +171,7 @@
     }
 
     function fetchExam() {
-        fetch('https://f772-42-116-198-161.ngrok-free.app/exam')
+        fetch('http://127.0.0.1:8000/exam')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('examTable');
