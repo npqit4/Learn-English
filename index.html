@@ -84,7 +84,7 @@
     }
 
     function fetchVocabulary() {
-        fetch('http://127.0.0.1:8000/vocabulary')
+        fetch('https://learn-english-340c.onrender.com/vocabulary')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('vocabularyTable');
@@ -117,7 +117,7 @@
     }
 
     function fetchPhrase() {
-        fetch('http://127.0.0.1:8000/phrase')
+        fetch('https://learn-english-340c.onrender.com/phrase')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('phraseTable');
@@ -145,7 +145,7 @@
     }
 
     function fetchQuestion() {
-        fetch('http://127.0.0.1:8000/question')
+        fetch('https://learn-english-340c.onrender.com/question')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('questionTable');
@@ -171,7 +171,7 @@
     }
 
     function fetchExam() {
-        fetch('http://127.0.0.1:8000/exam')
+        fetch('https://learn-english-340c.onrender.com/exam')
             .then(response => response.json())
             .then(data => {
                 const table = document.getElementById('examTable');
