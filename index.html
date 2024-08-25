@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Từ Vựng Tiếng Anh</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: 25%;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="button-container">
+    <button onclick="fetchVocabulary()">Random từ vựng</button>
+    <button onclick="fetchPhrase()">Random cụm từ</button>
+    <button onclick="fetchQuestion()">Random câu hỏi</button>
+    <button onclick="fetchExam  ()">Random đề thi</button>
+</div>
+<br><br>
+<table id="vocabularyTable">
+    <tr>
+        <th>Từ Vựng</th>
+        <th>Loại</th>
+        <th>Nghĩa</th>
+        <th>Phát Âm</th>
+    </tr>
+</table>
+
+<table id="phraseTable">
+    <tr>
+        <th>Cụm từ</th>
+        <th>Nghĩa</th>
+        <th>Phát Âm</th>
+    </tr>
+</table>
+
+<table id="questionTable">
+    <tr>
+        <th>Câu hỏi</th>
+        <th>Đáp án mẫu</th>
+    </tr>
+</table>
+
+<table id="examTable">
+    <tr>
+        <th>Đề thi</th>
+        <th>Đáp án mẫu</th>
+    </tr>
+</table>
+
+<script>
+
+    function toggleText(value) {
+        const text = document.getElementById(value);
+        if (text.style.display === 'none') {
+            text.style.display = 'block';
+        } else {
+            text.style.display = 'none';
+        }
+    }
+
+    function fetchVocabulary() {
+        fetch('https://f772-42-116-198-161.ngrok-free.app/vocabulary')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('vocabularyTable');
+                const row = document.createElement('tr');
+                // auto remove old data
+                table.innerHTML = `
+                    <tr>
+                        <th>Từ Vựng</th>
+                        <th>Loại</th>
+                        <th>Nghĩa</th>
+                        <th>Phát Âm</th>
+                    </tr>
+                `;
+
+                row.innerHTML = `
+                        <td><p id="vocabulary" style="display: none">${data.vocabulary}</p>
+                            <button onclick="toggleText('vocabulary')">Hiện/Ẩn</button>
+                        </td>
+                        <td><p id="type" style="display: none">${data.type}</p>
+                            <button onclick="toggleText('type')">Hiện/Ẩn</button>
+                        </td>
+                        <td><p id="meaning" style="display: none">${data.meaning}</p>
+                            <button onclick="toggleText('meaning')">Hiện/Ẩn</button>
+                        </td>
+                        <td><button onclick="speak('${data.vocabulary}')">Phát Âm</button></td>
+                    `;
+                table.appendChild(row);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function fetchPhrase() {
+        fetch('https://f772-42-116-198-161.ngrok-free.app/phrase')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('phraseTable');
+                const row = document.createElement('tr');
+                // auto remove old data
+                table.innerHTML = `
+                    <tr>
+                        <th>Cụm từ</th>
+                        <th>Nghĩa</th>
+                        <th>Phát Âm</th>
+                    </tr>
+                `;
+                row.innerHTML = `
+                        <td><p id="phrase" style="display: none">${data.phrase}</p>
+                            <button onclick="toggleText('phrase')">Hiện/Ẩn</button>
+                        </td>
+                        <td><p id="meaning_phr" style="display: none">${data.meaning}</p>
+                            <button onclick="toggleText('meaning_phr')">Hiện/Ẩn</button>
+                        </td>
+                        <td><button onclick="speak('${data.phrase}')">Phát Âm</button></td>
+                    `;
+                table.appendChild(row);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function fetchQuestion() {
+        fetch('https://f772-42-116-198-161.ngrok-free.app/question')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('questionTable');
+                const row = document.createElement('tr');
+                // auto remove old data
+                table.innerHTML = `
+                    <tr>
+                        <th>Câu hỏi</th>
+                        <th>Đáp án mẫu</th>
+                    </tr>
+                `;
+                row.innerHTML = `
+                        <td><p id="question" style="display: none">${data.question}</p>
+                            <button onclick="toggleText('question')">Hiện/Ẩn</button>
+                        </td>
+                        <td><p id="answer" style="display: none">${data.answer}</p>
+                            <button onclick="toggleText('answer')">Hiện/Ẩn</button>
+                        </td>
+                    `;
+                table.appendChild(row);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function fetchExam() {
+        fetch('https://f772-42-116-198-161.ngrok-free.app/exam')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('examTable');
+                const row = document.createElement('tr');
+                // auto remove old data
+                table.innerHTML = `
+                    <tr>
+                        <th>Đề thi</th>
+                        <th>Đáp án mẫu</th>
+                    </tr>
+                `;
+                row.innerHTML = `
+                        <td><p id="exam" style="display: none">${data.exam}</p>
+                            <button onclick="toggleText('exam')">Hiện/Ẩn</button>
+                        </td>
+                        <td><p id="answer" style="display: none">${data.answer}</p>
+                            <button onclick="toggleText('answer')">Hiện/Ẩn</button>
+                        </td>
+                    `;
+                table.appendChild(row);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function speak(word) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        speechSynthesis.speak(utterance);
+    }
+</script>
+</body>
+</html>
