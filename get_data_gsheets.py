@@ -10,11 +10,9 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = "1iUBDMtB7aoOoRjHPQe-VD181Fevw3YqpMf1UphBcWjs"
-SAMPLE_RANGE_NAME = "Vacabulary"
 
 
-def get_data_gsheets(gsheet_range):
+def get_data_gsheets(gsheet_id, gsheet_range):
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
     """
@@ -44,7 +42,7 @@ def get_data_gsheets(gsheet_range):
         sheet = service.spreadsheets()
         result = (
             sheet.values()
-            .get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range=gsheet_range)
+            .get(spreadsheetId=gsheet_id, range=gsheet_range)
             .execute()
         )
         values = result.get("values", [])
