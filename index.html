@@ -49,9 +49,6 @@
     <button onclick="fetchVocabulary()">Random từ vựng</button>
     <button onclick="fetchPhrase()">Random cụm từ</button>
     <button onclick="fetchQuestion()">Random câu hỏi</button>
-    <button onclick="fetchExam()">Random đề thi</button>
-    <button onclick="refreshData()">Làm mới dữ liệu</button>
-    <button onclick="update()">Cập nhật thông tin</button>
 </div>
 <br><br>
 <table id="vocabularyTable">
@@ -75,6 +72,8 @@
     <tr>
         <th>Câu hỏi</th>
         <th>Đáp án mẫu</th>
+        <th>Phát Âm</th>
+        <th>Phát Âm</th>
     </tr>
 </table>
 
@@ -84,6 +83,11 @@
         <th>Đáp án mẫu</th>
     </tr>
 </table>
+
+<div class="button-container">
+    <button onclick="refreshData()">Làm mới dữ liệu</button>
+    <button onclick="update()">Cập nhật thông tin</button>
+</div>
 
 <script>
 
@@ -168,6 +172,8 @@
                     <tr>
                         <th>Câu hỏi</th>
                         <th>Đáp án mẫu</th>
+                        <th>Phát Âm</th>
+                        <th>Phát Âm</th>
                     </tr>
                 `;
                 row.innerHTML = `
@@ -177,6 +183,8 @@
                         <td><p id="answer" style="display: none">${data.answer}</p>
                             <button onclick="toggleText('answer')">Hiện/Ẩn</button>
                         </td>
+                        <td><button onclick="speak('${data.question}')">Phát Âm</button></td>
+                        <td><button onclick="speak('${data.answer}')">Phát Âm</button></td>
                     `;
                 table.appendChild(row);
             })
