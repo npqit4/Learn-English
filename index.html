@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=eoPQELs7QM2J&format=png&color=000000" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng Từ Vựng Tiếng Anh</title>
@@ -229,8 +230,8 @@
 
     function speak(word) {
         const utterance = new SpeechSynthesisUtterance(word);
-        // random lang US vs UK
-        utterance.lang = Math.random() < 0.5 ? 'en-US' : 'en-UK';
+        // choosing language english
+        utterance.lang = 'en-US';
         // random voice
         utterance.voice = speechSynthesis.getVoices()[Math.floor(Math.random() * speechSynthesis.getVoices().length)];
         speechSynthesis.speak(utterance);
